@@ -1,0 +1,27 @@
+From ac15935764d37848d104ec460212dbc8e644904f Mon Sep 17 00:00:00 2001
+From: "Yue, Liang" <liang.yue@cienet.com.cn>
+Date: Mon, 31 Jul 2017 17:22:24 +0800
+Subject: [PATCH] clean ota.zip if install failed
+
+---
+ bootable/recovery/recovery.cpp | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/bootable/recovery/recovery.cpp b/bootable/recovery/recovery.cpp
+index 438260b..c929e43 100755
+--- a/bootable/recovery/recovery.cpp
++++ b/bootable/recovery/recovery.cpp
+@@ -1146,6 +1146,10 @@ main(int argc, char **argv) {
+         }
+     }
+ 
++    if (!force_reboot) {
++        finish_recovery(NULL);
++    }
++
+     // Save logs and clean up before rebooting or shutting down.
+     finish_recovery(send_intent);
+ 
+-- 
+1.9.1
+
